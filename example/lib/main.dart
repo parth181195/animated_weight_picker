@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
           child: AnimatedWeightPicker(
             min: 0,
             max: 10,
+            initialValue: 5,
             onChange: (newValue) {
               setState(() {
                 selectedValue = newValue;

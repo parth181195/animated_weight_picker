@@ -535,10 +535,6 @@ class _AnimatedWeightPickerState extends State<AnimatedWeightPicker> {
     double current = widget.min;
     double interval = widget.division.toPrecision(_divisionPrecision);
 
-    _selectedIndex = ((widget.initialValue ?? 0) / interval).round();
-    _scrollController =
-        FixedExtentScrollController(initialItem: _selectedIndex);
-
     int mjInterval = 0;
     int subInterval = widget.subIntervalAt;
     int mnInterval = 1;
@@ -566,6 +562,14 @@ class _AnimatedWeightPickerState extends State<AnimatedWeightPicker> {
       currentIndex++;
       current += interval;
     } while (current.toPrecision(2) <= widget.max);
+    final values = _valueList.map((element) {
+      return num.parse(element.value).toDouble();
+    }).toList();
+    if (widget.initialValue != null) {
+      _selectedIndex = values.indexOf(widget.initialValue!);
+    }
+    _scrollController =
+        FixedExtentScrollController(initialItem: _selectedIndex );
     if (!onInit) setState(() {});
   }
 
